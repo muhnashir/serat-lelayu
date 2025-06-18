@@ -1,0 +1,84 @@
+<script setup lang="ts">
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+  modelValue: {
+    type: Array,
+    required: true
+  }
+});
+
+const emit = defineEmits(['update:modelValue']);
+
+const updateMember = (index: number, field: string, value: string) => {
+  const updatedMembers = [...props.modelValue];
+  updatedMembers[index] = { ...updatedMembers[index], [field]: value };
+  emit('update:modelValue', updatedMembers);
+};
+
+const addMember = () => {
+  const updatedMembers = [...props.modelValue, { name: '', relationship: '' }];
+  emit('update:modelValue', updatedMembers);
+};
+
+const removeMember = (index: number) => {
+  if (props.modelValue.length > 1) {
+    const updatedMembers = [...props.modelValue];
+    updatedMembers.splice(index, 1);
+    emit('update:modelValue', updatedMembers);
+  }
+};
+</script>
+
+<template>
+  <div>
+    <h2 class="text-xl font-semibold mb-4">Kulawarga</h2>
+
+    <div v-for="(member, index) in modelValue" :key="index" class="mb-6 p-4 border rounded-lg bg-gray-50">
+      <div class="flex justify-between items-center mb-2">
+        <h3 class="text-lg font-medium">Kulawarga {{ index + 1 }}</h3>
+        <button
+          @click="removeMember(index)"
+          class="text-red-500 hover:text-red-700"
+          :disabled="modelValue.length === 1"
+        >
+          <span class="text-xl">×</span>
+        </button>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" :for="`name-${index}`">
+          Asma
+        </label>
+        <input
+          :id="`name-${index}`"
+          type="text"
+          :value="member.name"
+          @input="updateMember(index, 'name', $event.target.value)"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" :for="`relationship-${index}`">
+          Hubungan kaliyan Almarhum/Almarhumah
+        </label>
+        <input
+          :id="`relationship-${index}`"
+          type="text"
+          :value="member.relationship"
+          @input="updateMember(index, 'relationship', $event.target.value)"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="tuladha: Garwa, Putra, Wayah"
+        />
+      </div>
+    </div>
+
+    <button
+      @click="addMember"
+      class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+    >
+      <span class="mr-2">+</span> Tambah Kulawarga
+    </button>
+  </div>
+</template>
