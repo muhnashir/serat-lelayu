@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, reactive,computed } from 'vue';
 import DeceasedInfoForm from './components/DeceasedInfoForm.vue';
 import FuneralInfoForm from './components/FuneralInfoForm.vue';
 import FamilyMembersForm from './components/FamilyMembersForm.vue';
@@ -42,6 +42,22 @@ const prevStep = () => {
     currentStep.value--;
   }
 };
+
+const isDisabledDeceased = computed(() => {
+  const d = formState.deceased;
+  return !d.name || !d.address || !d.age || !d.placeOfDeath || !d.dateOfDeath || !d.timeOfDeath;
+});
+
+const isDisabledFuneral= computed(() => {
+  const f = formState.funeral;
+  return !f.day || !f.date || !f.time || !f.location;
+});
+
+const hasValidFamilyMember = computed(() => {
+  return formState.familyMembers.some(member =>
+    member.name.trim() !== '' && member.relationship.trim() !== ''
+  );
+});
 
 // Generate PDF function
 const generatePDF = () => {
@@ -96,7 +112,8 @@ const generatePDF = () => {
             <div class="mt-6 flex justify-end">
               <button
                 @click="nextStep"
-                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+                :disabled="isDisabledDeceased"
+                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Selanjutnya
               </button>
@@ -115,7 +132,8 @@ const generatePDF = () => {
               </button>
               <button
                 @click="nextStep"
-                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+                :disabled="isDisabledFuneral"
+                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Selanjutnya
               </button>
@@ -134,9 +152,10 @@ const generatePDF = () => {
               </button>
               <button
                 @click="nextStep"
-                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
+                :disabled="hasValidFamilyMember"
+                class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Preview
+                Previewww
               </button>
             </div>
           </div>

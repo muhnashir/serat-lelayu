@@ -30,6 +30,7 @@ const updateField = (field: string, value: string) => {
         :value="modelValue.name"
         @input="updateField('name', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Cth : Fulan"
       />
     </div>
 
@@ -42,6 +43,7 @@ const updateField = (field: string, value: string) => {
         :value="modelValue.address"
         @input="updateField('address', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Cth : Sedan, Sariharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581"
         rows="3"
       ></textarea>
     </div>
@@ -56,6 +58,7 @@ const updateField = (field: string, value: string) => {
         :value="modelValue.age"
         @input="updateField('age', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Cth : 20"
       />
     </div>
 
@@ -69,6 +72,7 @@ const updateField = (field: string, value: string) => {
         :value="modelValue.placeOfDeath"
         @input="updateField('placeOfDeath', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Cth : RS UII"
       />
     </div>
 

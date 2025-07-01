@@ -31,12 +31,12 @@ const updateField = (field: string, value: string) => {
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
         <option value="">Pilih Hari</option>
-        <option value="Senen">Senen</option>
+        <option value="Senin">Senin</option>
         <option value="Selasa">Selasa</option>
-        <option value="Rebo">Rebo</option>
-        <option value="Kemis">Kemis</option>
-        <option value="Jemuah">Jemuah</option>
-        <option value="Setu">Setu</option>
+        <option value="Rabu">Rabu</option>
+        <option value="Kamis">Kamis</option>
+        <option value="Jum'at">Jum'at</option>
+        <option value="Sabtu">Sabtu</option>
         <option value="Minggu">Minggu</option>
       </select>
     </div>
@@ -77,6 +77,7 @@ const updateField = (field: string, value: string) => {
         :value="modelValue.location"
         @input="updateField('location', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        placeholder="Cth : TPU Tegallayang 10"
       />
     </div>
   </div>
