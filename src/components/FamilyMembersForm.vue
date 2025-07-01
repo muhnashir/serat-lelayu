@@ -32,11 +32,11 @@ const removeMember = (index: number) => {
 
 <template>
   <div>
-    <h2 class="text-xl font-semibold mb-4">Kulawarga</h2>
+    <h2 class="text-xl font-semibold mb-4">Keluarga</h2>
 
     <div v-for="(member, index) in modelValue" :key="index" class="mb-6 p-4 border rounded-lg bg-gray-50">
       <div class="flex justify-between items-center mb-2">
-        <h3 class="text-lg font-medium">Kulawarga {{ index + 1 }}</h3>
+        <h3 class="text-lg font-medium">Keluarga {{ index + 1 }}</h3>
         <button
           @click="removeMember(index)"
           class="text-red-500 hover:text-red-700"
@@ -48,7 +48,7 @@ const removeMember = (index: number) => {
 
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" :for="`name-${index}`">
-          Asma
+          Nama
         </label>
         <input
           :id="`name-${index}`"
@@ -56,12 +56,13 @@ const removeMember = (index: number) => {
           :value="member.name"
           @input="updateMember(index, 'name', $event.target.value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          placeholder="Fulan"
         />
       </div>
 
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" :for="`relationship-${index}`">
-          Hubungan kaliyan Almarhum/Almarhumah
+          Hubungan dengan Almarhum/Almarhumah
         </label>
         <input
           :id="`relationship-${index}`"
@@ -69,16 +70,16 @@ const removeMember = (index: number) => {
           :value="member.relationship"
           @input="updateMember(index, 'relationship', $event.target.value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          placeholder="tuladha: Garwa, Putra, Wayah"
+          placeholder="Cth: Suami/Anak/Kakak"
         />
       </div>
     </div>
 
     <button
       @click="addMember"
-      class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-500 hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
     >
-      <span class="mr-2">+</span> Tambah Kulawarga
+      <span class="mr-2">+</span> Tambah Keluarga
     </button>
   </div>
 </template>

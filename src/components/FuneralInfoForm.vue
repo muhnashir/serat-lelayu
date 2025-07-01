@@ -22,7 +22,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="day">
-        Dinten
+        Hari
       </label>
       <select
         id="day"
@@ -30,7 +30,7 @@ const updateField = (field: string, value: string) => {
         @change="updateField('day', $event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       >
-        <option value="">Pilih Dinten</option>
+        <option value="">Pilih Hari</option>
         <option value="Senen">Senen</option>
         <option value="Selasa">Selasa</option>
         <option value="Rebo">Rebo</option>
@@ -56,7 +56,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="time">
-        Tabuh Pamakaman
+        Jam Pamakaman
       </label>
       <input
         id="time"
@@ -69,7 +69,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
-        Papan Pamakaman
+        Tempat Pamakaman
       </label>
       <input
         id="location"

@@ -26,15 +26,6 @@ const downloadPDF = () => {
   <div>
     <h2 class="text-xl font-semibold mb-4">Pratinjau Dokumen</h2>
 
-    <div class="mb-4 flex justify-end">
-      <button
-        @click="downloadPDF"
-        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-      >
-        Undhuh PDF
-      </button>
-    </div>
-
     <div id="pdf-content" class="border p-8 bg-white">
       <div class="text-center mb-8">
         <div class="border-b-2 border-t-2 border-black py-2">

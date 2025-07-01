@@ -18,11 +18,11 @@ const updateField = (field: string, value: string) => {
 
 <template>
   <div>
-    <h2 class="text-xl font-semibold mb-4">Informasi Tiyang Ingkang Seda</h2>
+    <h2 class="text-xl font-semibold mb-4">Informasi Orang yang Meninggal</h2>
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-        Asma
+        Nama
       </label>
       <input
         id="name"
@@ -48,7 +48,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="age">
-        Yuswa
+        Umur
       </label>
       <input
         id="age"
@@ -61,7 +61,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="placeOfDeath">
-        Papan Seda
+        Tempat Meninggal
       </label>
       <input
         id="placeOfDeath"
@@ -75,7 +75,7 @@ const updateField = (field: string, value: string) => {
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="dateOfDeath">
-          Tanggal Seda
+          Tanggal Meninggal
         </label>
         <input
           id="dateOfDeath"
@@ -88,7 +88,7 @@ const updateField = (field: string, value: string) => {
 
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="timeOfDeath">
-          Tabuh Seda
+          Jam Meninggal
         </label>
         <input
           id="timeOfDeath"
