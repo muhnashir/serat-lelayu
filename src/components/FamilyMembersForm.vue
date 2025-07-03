@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, computed } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -16,9 +16,14 @@ const updateMember = (index: number, field: string, value: string) => {
   emit('update:modelValue', updatedMembers);
 };
 
+const maxFamilyMembers = 10;
+const isMaxMembersReached = computed(() => props.modelValue.length >= maxFamilyMembers);
+
 const addMember = () => {
-  const updatedMembers = [...props.modelValue, { name: '', relationship: '' }];
-  emit('update:modelValue', updatedMembers);
+  if (props.modelValue.length < maxFamilyMembers) {
+    const updatedMembers = [...props.modelValue, { name: '', relationship: '' }];
+    emit('update:modelValue', updatedMembers);
+  }
 };
 
 const removeMember = (index: number) => {
@@ -77,9 +82,13 @@ const removeMember = (index: number) => {
 
     <button
       @click="addMember"
-      class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-500 hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+      :disabled="isMaxMembersReached"
+      class="mt-4 w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-500 hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
     >
       <span class="mr-2">+</span> Tambah Keluarga
     </button>
+    <div v-if="isMaxMembersReached" class="mt-2 text-sm text-red-500 text-center">
+      Maksimal 10 anggota keluarga
+    </div>
   </div>
 </template>
