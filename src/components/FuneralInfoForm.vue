@@ -42,7 +42,7 @@ function handleDateChange(value: string) {
         id="date"
         type="date"
         :value="modelValue.date"
-        @input="handleDateChange($event.target.value)"
+        @input="handleDateChange(($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
     </div>
@@ -55,7 +55,7 @@ function handleDateChange(value: string) {
         id="time"
         type="time"
         :value="modelValue.time"
-        @input="updateField('time', $event.target.value)"
+        @input="updateField('time', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
     </div>
@@ -68,7 +68,7 @@ function handleDateChange(value: string) {
         id="location"
         type="text"
         :value="modelValue.location"
-        @input="updateField('location', $event.target.value)"
+        @input="updateField('location', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="Cth : TPU Tegallayang 10"
       />

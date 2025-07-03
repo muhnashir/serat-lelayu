@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, computed } from 'vue';
 
+interface FamilyMember {
+  name: string;
+  relationship: string;
+}
+
 const props = defineProps({
   modelValue: {
-    type: Array,
+    type: Array as () => FamilyMember[],
     required: true
   }
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits<{
+  'update:modelValue': [value: FamilyMember[]];
+}>();
 
-const updateMember = (index: number, field: string, value: string) => {
+const updateMember = (index: number, field: keyof FamilyMember, value: string) => {
   const updatedMembers = [...props.modelValue];
   updatedMembers[index] = { ...updatedMembers[index], [field]: value };
   emit('update:modelValue', updatedMembers);
@@ -21,14 +28,15 @@ const isMaxMembersReached = computed(() => props.modelValue.length >= maxFamilyM
 
 const addMember = () => {
   if (props.modelValue.length < maxFamilyMembers) {
-    const updatedMembers = [...props.modelValue, { name: '', relationship: '' }];
+    const newMember: FamilyMember = { name: '', relationship: '' };
+    const updatedMembers = [...props.modelValue, newMember];
     emit('update:modelValue', updatedMembers);
   }
 };
 
 const removeMember = (index: number) => {
   if (props.modelValue.length > 1) {
-    const updatedMembers = [...props.modelValue];
+    const updatedMembers: FamilyMember[] = [...props.modelValue];
     updatedMembers.splice(index, 1);
     emit('update:modelValue', updatedMembers);
   }
@@ -59,7 +67,7 @@ const removeMember = (index: number) => {
           :id="`name-${index}`"
           type="text"
           :value="member.name"
-          @input="updateMember(index, 'name', $event.target.value)"
+          @input="updateMember(index, 'name', ($event.target as HTMLInputElement).value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Fulan"
         />
@@ -73,7 +81,7 @@ const removeMember = (index: number) => {
           :id="`relationship-${index}`"
           type="text"
           :value="member.relationship"
-          @input="updateMember(index, 'relationship', $event.target.value)"
+          @input="updateMember(index, 'relationship', ($event.target as HTMLInputElement).value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           placeholder="Cth: Suami/Anak/Kakak"
         />

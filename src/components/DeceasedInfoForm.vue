@@ -42,7 +42,7 @@ function handleDateChange(value: string) {
         id="name"
         type="text"
         :value="modelValue.name"
-        @input="updateField('name', $event.target.value)"
+        @input="updateField('name', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="Cth : Fulan"
       />
@@ -55,7 +55,7 @@ function handleDateChange(value: string) {
       <textarea
         id="address"
         :value="modelValue.address"
-        @input="updateField('address', $event.target.value)"
+        @input="updateField('address', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="Cth : Sedan, Sariharjo, Kec. Ngaglik, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55581"
         rows="3"
@@ -70,7 +70,7 @@ function handleDateChange(value: string) {
         id="age"
         type="number"
         :value="modelValue.age"
-        @input="updateField('age', $event.target.value)"
+        @input="updateField('age', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="Cth : 20"
       />
@@ -84,7 +84,7 @@ function handleDateChange(value: string) {
         id="placeOfDeath"
         type="text"
         :value="modelValue.placeOfDeath"
-        @input="updateField('placeOfDeath', $event.target.value)"
+        @input="updateField('placeOfDeath', ($event.target as HTMLInputElement).value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         placeholder="Cth : RS UII"
       />
@@ -99,7 +99,7 @@ function handleDateChange(value: string) {
           id="dateOfDeath"
           type="date"
           :value="modelValue.dateOfDeath"
-          @input="handleDateChange($event.target.value)"
+          @input="handleDateChange(($event.target as HTMLInputElement).value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
@@ -112,7 +112,7 @@ function handleDateChange(value: string) {
           id="timeOfDeath"
           type="time"
           :value="modelValue.timeOfDeath"
-          @input="updateField('timeOfDeath', $event.target.value)"
+          @input="updateField('timeOfDeath', ($event.target as HTMLInputElement).value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>

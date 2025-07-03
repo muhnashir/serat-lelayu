@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { formatTanggalIndo } from '@/utils/date';
-
-const props = defineProps({
+defineProps({
   formData: {
     type: Object,
     required: true,
