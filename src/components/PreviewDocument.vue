@@ -1,72 +1,83 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from 'vue'
 
 const props = defineProps({
   formData: {
     type: Object,
-    required: true
-  }
-});
-
-const downloadPDF = () => {
-  const element = document.getElementById('pdf-content');
-  const opt = {
-    margin: 0.5,
-    filename: 'surat-lelayu.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-  };
-
-  window.html2pdf().set(opt).from(element).save();
-};
+    required: true,
+  },
+})
 </script>
 
 <template>
   <div>
     <h2 class="text-xl font-semibold mb-4">Pratinjau Dokumen</h2>
 
-    <div id="pdf-content" class="border p-8 bg-white">
-      <div class="text-center mb-8">
-        <div class="border-b-2 border-t-2 border-black py-2">
-          <h1 class="text-3xl font-bold mb-2">SERAT LELAYU</h1>
+    <div id="pdf-content" class="bg-white" style="padding: 0; max-height: 29.7cm; overflow: hidden">
+      <!-- Each page is contained in its own div with border and padding -->
+      <div
+        class="border bg-white"
+        style="padding: 1cm; height: 27.7cm; box-sizing: border-box; page-break-after: always"
+      >
+        <div class="text-center mb-4">
+          <h1 class="text-xl font-bold">Pawartos Lelayu</h1>
+          <div class="flex justify-center gap-2">
+            <p>Katur dumateng :</p>
+            <p>…</p>
+          </div>
+          <div class="flex justify-center gap-2">
+            <p>Ing :</p>
+            <p>…</p>
+          </div>
         </div>
-        <p class="text-lg mt-4">Innalillahi wa inna ilaihi roji'un</p>
-      </div>
 
-      <div class="mb-8">
-        <p class="mb-3 text-center">Kanthi sedhih ing manah, kula ngabaraken bilih sampun kapundhut wangsul dhateng ngarsanipun Gusti Allah SWT:</p>
-        <h2 class="text-2xl font-bold mb-3 text-center">{{ formData.deceased.name }}</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-          <p class="mb-2"><span class="font-semibold">Alamat:</span> {{ formData.deceased.address }}</p>
-          <p class="mb-2"><span class="font-semibold">Yuswa:</span> {{ formData.deceased.age }} taun</p>
+        <div class="mb-4">
+          <p class="mb-1">Assalamu’alaikum Wr. Wb.</p>
+          <p class="font-bold text-center uppercase">INNA LILLAAHI WA INNA ILAIHI ROJI’UN</p>
+          <p class="text-center">
+            Sampun katimbalan sowan wonten ngarsa dalem ALLAH SWT, panjenenganipun:
+          </p>
+          <h2 class="text-2xl font-bold text-center mt-2 underline">
+            {{ formData.deceased.name }}
+          </h2>
         </div>
-        <p class="mb-2">
-          <span class="font-semibold">Seda ing dinten:</span>
-          {{ new Date(formData.deceased.dateOfDeath).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) }}
-          tabuh {{ formData.deceased.timeOfDeath }} WIB
-        </p>
-        <p class="mb-2"><span class="font-semibold">Papan:</span> {{ formData.deceased.placeOfDeath }}</p>
-      </div>
 
-      <div class="mb-8">
-        <p class="mb-3 text-center">Jenazah badhe kasareaken wonten ing:</p>
-        <p class="mb-2"><span class="font-semibold">Dinten/Tanggal:</span> {{ formData.funeral.day }}, {{ new Date(formData.funeral.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) }}</p>
-        <p class="mb-2"><span class="font-semibold">Tabuh:</span> {{ formData.funeral.time }} WIB</p>
-        <p class="mb-2"><span class="font-semibold">Papan:</span> {{ formData.funeral.location }}</p>
-      </div>
+        <div class="mb-6 text-sm leading-relaxed">
+          <p><span class="font-semibold">Pidalem ing</span> : {{ formData.deceased.address }}</p>
+          <p><span class="font-semibold">Yuswo</span> : {{ formData.deceased.age }} tahun</p>
+          <p><span class="font-semibold">Wonten</span> : {{ formData.deceased.placeOfDeath }}</p>
+          <p><span class="font-semibold">Dinten</span> : {{ formData.deceased.dateOfDeath }}</p>
+          <p><span class="font-semibold">Wanci</span> : {{ formData.deceased.timeOfDeath }} WIB</p>
+        </div>
 
-      <div class="mb-8">
-        <p class="mb-3 text-center font-semibold">Kulawarga ingkang dipuntilar:</p>
-        <ul class="list-none pl-0">
-          <li v-for="(member, index) in formData.familyMembers" :key="index" class="mb-2 text-center">
-            {{ member.name }} ({{ member.relationship }})
-          </li>
-        </ul>
-      </div>
+        <div class="mb-6">
+          <p class="font-semibold text-center">Jenazah badhe kasareaken:</p>
+          <p><span class="font-semibold">Dinten</span> : Selasa, 26 November 2024</p>
+          <p><span class="font-semibold">Wanci</span> : 14.00 WIB</p>
+          <p><span class="font-semibold">Ing Makam</span> : {{ formData.funeral.location }}</p>
+        </div>
 
-      <div class="text-center mt-8 border-t-2 border-black pt-4">
-        <p class="italic">"Mugi-mugi amal saha ibadahipun almarhum/almarhumah katampi wonten ing ngarsanipun Gusti Allah SWT lan kulawarga ingkang dipuntilar tansah dipunparingi kesabaran lan kekiyatan."</p>
+        <div class="mb-6 text-justify text-sm">
+          <p>
+            Mekaten pawartos lelayu menika, mugi ndadosaken kawuningan dumateng Sedaya kanak kadang.
+            Awit kawigatosan sedaya kulo warga ingkang tinilar ngaturaken agunge panuwun.
+          </p>
+        </div>
+
+        <div class="mb-4">
+          <p class="font-semibold text-center">Ingkang nandang sungkowo:</p>
+          <ol class="list-decimal list-outside pl-4 text-sm space-y-1">
+            <li v-for="(member, index) in formData.familyMembers" :key="index">
+              {{ member.name}} <div style="color: #6b7280">( {{ member.relationship}} )</div>
+            </li>
+            <li>Lan Sedoyo Keluargo</li>
+          </ol>
+        </div>
+
+        <div class="text-center mt-6 border-t border-black pt-4 text-sm italic">
+          "Mugi-mugi amal saha ibadahipun almarhum/almarhumah katampi wonten ing ngarsanipun Gusti
+          Allah SWT lan kulawarga ingkang dipuntilar tansah dipunparingi kesabaran lan kekiyatan."
+        </div>
       </div>
     </div>
   </div>

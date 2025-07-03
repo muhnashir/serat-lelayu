@@ -63,12 +63,16 @@ const hasValidFamilyMember = computed(() => {
 const generatePDF = () => {
   const element = document.getElementById('pdf-content');
   if (element) {
+    const name = formState.deceased.name?.trim() || '';
+    const safeName = name.replace(/\s+/g, '-').toLowerCase(); // nama jadi URL-safe
+
     const opt = {
-      margin: 1,
-      filename: 'berita-lelayu.pdf',
+      margin: 1, // Set margin to 0 since we're using padding in the component
+      filename: `berita-lelayu-${safeName}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: 'avoid-all', before: '#page-break' } // Prevent border from continuing to next page
     };
 
     window.html2pdf().set(opt).from(element).save();
@@ -152,10 +156,10 @@ const generatePDF = () => {
               </button>
               <button
                 @click="nextStep"
-                :disabled="hasValidFamilyMember"
+                :disabled="!hasValidFamilyMember"
                 class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Previewww
+                Preview
               </button>
             </div>
           </div>
