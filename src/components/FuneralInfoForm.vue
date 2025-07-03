@@ -14,6 +14,20 @@ const updateField = (field: string, value: string) => {
   const updatedValue = { ...props.modelValue, [field]: value };
   emit('update:modelValue', updatedValue);
 };
+
+function getDayName(dateString : string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', { weekday: 'long' });
+}
+
+function handleDateChange(value: string) {
+  const dayName = getDayName(value);
+  emit('update:modelValue', {
+    ...props.modelValue,
+    date: value,
+    day: dayName
+  });
+}
 </script>
 
 <template>
@@ -21,42 +35,21 @@ const updateField = (field: string, value: string) => {
     <h2 class="text-xl font-semibold mb-4">Informasi Pamakaman</h2>
 
     <div class="mb-4">
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="day">
-        Hari
-      </label>
-      <select
-        id="day"
-        :value="modelValue.day"
-        @change="updateField('day', $event.target.value)"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      >
-        <option value="">Pilih Hari</option>
-        <option value="Senin">Senin</option>
-        <option value="Selasa">Selasa</option>
-        <option value="Rabu">Rabu</option>
-        <option value="Kamis">Kamis</option>
-        <option value="Jum'at">Jum'at</option>
-        <option value="Sabtu">Sabtu</option>
-        <option value="Minggu">Minggu</option>
-      </select>
-    </div>
-
-    <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="date">
-        Tanggal Pamakaman
+        Tanggal Pemakaman
       </label>
       <input
         id="date"
         type="date"
         :value="modelValue.date"
-        @input="updateField('date', $event.target.value)"
+        @input="handleDateChange($event.target.value)"
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
     </div>
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="time">
-        Jam Pamakaman
+        Jam Pemakaman
       </label>
       <input
         id="time"
@@ -69,7 +62,7 @@ const updateField = (field: string, value: string) => {
 
     <div class="mb-4">
       <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
-        Tempat Pamakaman
+        Tempat Pemakaman
       </label>
       <input
         id="location"

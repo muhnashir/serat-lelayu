@@ -14,6 +14,20 @@ const updateField = (field: string, value: string) => {
   const updatedValue = { ...props.modelValue, [field]: value };
   emit('update:modelValue', updatedValue);
 };
+
+function getDayName(dateString : string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('id-ID', { weekday: 'long' });
+}
+
+function handleDateChange(value: string) {
+  const dayName = getDayName(value);
+  emit('update:modelValue', {
+    ...props.modelValue,
+    dateOfDeath: value,
+    dayOfDeath: dayName
+  });
+}
 </script>
 
 <template>
@@ -85,7 +99,7 @@ const updateField = (field: string, value: string) => {
           id="dateOfDeath"
           type="date"
           :value="modelValue.dateOfDeath"
-          @input="updateField('dateOfDeath', $event.target.value)"
+          @input="handleDateChange($event.target.value)"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
