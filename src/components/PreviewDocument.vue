@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import { formatTanggalIndo } from '@/utils/date';
+import { formatTanggalIndo, getPasaran } from '@/utils/date';
 defineProps({
   formData: {
     type: Object,
@@ -46,13 +46,13 @@ defineProps({
           <p><span class="font-semibold">Pidalem ing</span> : {{ formData.deceased.address }}</p>
           <p><span class="font-semibold">Yuswo</span> : {{ formData.deceased.age }} tahun</p>
           <p v-if="formData.deceased.placeOfDeath && formData.deceased.placeOfDeath.trim() !== ''"><span class="font-semibold">Wonten</span> : {{ formData.deceased.placeOfDeath }}</p>
-          <p><span class="font-semibold">Dinten</span> : {{ formData.deceased.dayOfDeath }}, {{ formatTanggalIndo(formData.deceased.dateOfDeath) }}</p>
+          <p><span class="font-semibold">Dinten</span> : {{ formData.deceased.dayOfDeath }} {{ getPasaran(formData.deceased.dateOfDeath) }}, {{ formatTanggalIndo(formData.deceased.dateOfDeath) }}</p>
           <p><span class="font-semibold">Wanci</span> : {{ formData.deceased.timeOfDeath }} WIB</p>
         </div>
 
         <div class="mb-6">
           <p class="font-semibold text-center mb-2">Jenazah badhe kasareaken:</p>
-          <p><span class="font-semibold">Dinten</span> : {{ formData.funeral.day }}, {{formatTanggalIndo(formData.funeral.date) }}</p>
+          <p><span class="font-semibold">Dinten</span> : {{ formData.funeral.day }} {{ getPasaran(formData.funeral.date) }}, {{ formatTanggalIndo(formData.funeral.date) }}</p>
           <p><span class="font-semibold">Wanci</span> : {{ formData.funeral.time }} WIB</p>
           <p><span class="font-semibold">Ing Makam</span> : {{ formData.funeral.location }}</p>
         </div>
