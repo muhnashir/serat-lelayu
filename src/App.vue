@@ -46,7 +46,7 @@ const prevStep = () => {
 
 const isDisabledDeceased = computed(() => {
   const d = formState.deceased;
-  return !d.name || !d.address || !d.age || !d.placeOfDeath || !d.dateOfDeath || !d.dayOfDeath || !d.timeOfDeath;
+  return !d.name || !d.address || !d.age || !d.dateOfDeath || !d.dayOfDeath || !d.timeOfDeath;
 });
 
 const isDisabledFuneral= computed(() => {

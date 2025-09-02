@@ -45,7 +45,7 @@ defineProps({
         <div class="mb-6 leading-relaxed">
           <p><span class="font-semibold">Pidalem ing</span> : {{ formData.deceased.address }}</p>
           <p><span class="font-semibold">Yuswo</span> : {{ formData.deceased.age }} tahun</p>
-          <p><span class="font-semibold">Wonten</span> : {{ formData.deceased.placeOfDeath }}</p>
+          <p v-if="formData.deceased.placeOfDeath && formData.deceased.placeOfDeath.trim() !== ''"><span class="font-semibold">Wonten</span> : {{ formData.deceased.placeOfDeath }}</p>
           <p><span class="font-semibold">Dinten</span> : {{ formData.deceased.dayOfDeath }}, {{ formatTanggalIndo(formData.deceased.dateOfDeath) }}</p>
           <p><span class="font-semibold">Wanci</span> : {{ formData.deceased.timeOfDeath }} WIB</p>
         </div>
