@@ -21,7 +21,14 @@ defineProps({
       <!-- Each page is contained in its own div with border and padding -->
       <div
         class="bg-white"
-        style="padding: 1cm 1.5cm; height: 27.7cm; box-sizing: border-box; page-break-after: always; font-size: 11pt; line-height: 1.4;"
+        :style="{
+          padding: isPdfMode ? '1cm 1.5cm' : '1cm 0cm',
+          height: '27.7cm',
+          boxSizing: 'border-box',
+          pageBreakAfter: 'always',
+          fontSize: '11pt',
+          lineHeight: '1.4'
+        }"
       >
 
         <!-- Header -->
