@@ -6,6 +6,10 @@ defineProps({
     type: Object,
     required: true,
   },
+  isPdfMode: {
+    type: Boolean,
+    default: false,
+  }
 })
 </script>
 
@@ -16,78 +20,146 @@ defineProps({
     <div id="pdf-content" class="bg-white" style="padding: 0; max-height: 29.7cm; overflow: hidden">
       <!-- Each page is contained in its own div with border and padding -->
       <div
-        class="border bg-white"
-        style="padding: 0.5cm; height: 27.7cm; box-sizing: border-box; page-break-after: always"
+        class="bg-white"
+        style="padding: 1cm 1.5cm; height: 27.7cm; box-sizing: border-box; page-break-after: always; font-size: 11pt; line-height: 1.4;"
       >
-        <div class="text-center mb-4">
-          <h1 class="text-xl font-bold">Pawartos Lelayu</h1>
-          <div class="flex justify-center gap-2">
-            <p>Katur dumateng :</p>
-            <p>…</p>
-          </div>
-          <div class="flex justify-center gap-2">
-            <p>Ing :</p>
-            <p>…</p>
+
+        <!-- Header -->
+        <div
+          :class="[
+            'text-center flex flex-col',
+            isPdfMode ? 'gap-4 mb-4' : 'gap-2 mb-2'
+          ]">
+          <h1
+            :class="[
+                'font-extrabold',
+                isPdfMode ? 'text-5xl mb-5' : 'text-2xl mb-2'
+              ]">PAWARTOS LELAYU
+          </h1>
+          <p
+            :class="[
+              isPdfMode ? 'text-3xl mb-4' : 'text-xl mb-3'
+            ]" style="font-family: 'Vazirmatn', sans-serif;">
+            إِنَّا لِلّٰهِ وَإِنَّا إِلَيْهِ رَاجِعُوْنَ
+          </p>
+
+          <div class="flex flex-col text-left" style="font-size: 10pt;">
+            <div class="flex gap-2">
+              <p style="width: 120px;">Katur dhumateng</p>
+              <p>:</p>
+              <p>.............................</p>
+            </div>
+            <div class="flex gap-2">
+              <p style="width: 120px;">Wonten ing</p>
+              <p>:</p>
+              <p>.............................</p>
+            </div>
           </div>
         </div>
 
-        <div class="mb-4">
-          <p class="mb-1">Assalamu’alaikum Wr. Wb.</p>
-          <p class="font-bold text-center uppercase">INNA LILLAAHI WA INNA ILAIHI ROJI’UN</p>
-          <p class="text-center">
-            Sampun katimbalan sowan wonten ngarsa dalem ALLAH SWT, panjenenganipun:
+        <!-- Pembuka -->
+        <div class="mb-3" style="font-size: 10pt;">
+          <p class="mb-1 italic">Assalamu'alaikum wr. wb</p>
+          <p class="mb-1">
+            Sampun katimbalan sowan wonten ngarsanipun Allah SWT panjenenganipun :
           </p>
-          <h2 class="text-2xl font-bold text-center mt-2 underline">
-            {{ formData.deceased.name }}
+        </div>
+
+        <!-- Nama Almarhum -->
+        <div
+          :class="[
+             'text-center flex flex-col',
+              isPdfMode ? 'gap-4 mb-4' : 'gap-2 mb-2'
+          ]">
+          <h2
+            :class="[
+                'font-extrabold italic',
+                isPdfMode ? 'text-4xl' : 'text-xl'
+              ]">{{ formData.deceased.name }}
           </h2>
-        </div>
-
-        <div class="mb-6 leading-relaxed">
-          <p><span class="font-semibold">Pidalem ing</span> : {{ formData.deceased.address }}</p>
-          <p><span class="font-semibold">Yuswo</span> : {{ formData.deceased.age }} tahun</p>
-          <p v-if="formData.deceased.placeOfDeath && formData.deceased.placeOfDeath.trim() !== ''"><span class="font-semibold">Wonten</span> : {{ formData.deceased.placeOfDeath }}</p>
-          <p><span class="font-semibold">Dinten</span> : {{ formData.deceased.dayOfDeath }} {{ getPasaran(formData.deceased.dateOfDeath) }}, {{ formatTanggalIndo(formData.deceased.dateOfDeath) }}</p>
-          <p><span class="font-semibold">Wanci</span> : {{ formData.deceased.timeOfDeath }} WIB</p>
-        </div>
-
-        <div class="mb-6">
-          <p class="font-semibold text-center mb-2">Jenazah badhe kasareaken:</p>
-          <p><span class="font-semibold">Dinten</span> : {{ formData.funeral.day }} {{ getPasaran(formData.funeral.date) }}, {{ formatTanggalIndo(formData.funeral.date) }}</p>
-          <p><span class="font-semibold">Wanci</span> : {{ formData.funeral.time }} WIB</p>
-          <p><span class="font-semibold">Ing Makam</span> : {{ formData.funeral.location }}</p>
-        </div>
-
-        <div class="mb-6 text-justify text-sm">
-          <p>
-            Mekaten pawartos lelayu menika, mugi ndadosaken kawuningan dumateng Sedaya kanak kadang.
-            Awit kawigatosan sedaya kulo warga ingkang tinilar ngaturaken agunge panuwun.
+          <p style="font-size: 10pt;">
+            Yuswo : {{ formData.deceased.age }} Tahun
           </p>
         </div>
 
-        <div class="mb-4">
-          <p class="font-semibold text-center mb-2">Ingkang Nandang sungkowo:</p>
+        <!-- Detail Kematian -->
+        <div class="mb-3" style="font-size: 10pt;">
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Pidalem wonten ing</p>
+            <p>:</p>
+            <p>{{ formData.deceased.address }}</p>
+          </div>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Sedo rikolo dinten</p>
+            <p>:</p>
+            <p>{{ formData.deceased.dayOfDeath }} {{ getPasaran(formData.deceased.dateOfDeath) }}</p>
+          </div>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Suryo Kaping</p>
+            <p>:</p>
+            <p>{{ formatTanggalIndo(formData.deceased.dateOfDeath) }}</p>
+          </div>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Wanci tabuh</p>
+            <p>:</p>
+            <p>{{ formData.deceased.timeOfDeath }} WIB</p>
+          </div>
+        </div>
+
+        <!-- Pemakaman -->
+        <div class="mb-3" style="font-size: 10pt;">
+          <p class="mb-1 font-semibold">Jenazah badhe kasarekaken wonten ing :</p>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Dinten</p>
+            <p>:</p>
+            <p>{{ formData.funeral.day }} {{ getPasaran(formData.funeral.date) }}</p>
+          </div>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Tanggal</p>
+            <p>:</p>
+            <p>{{ formatTanggalIndo(formData.funeral.date) }}</p>
+          </div>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Wanci Jam</p>
+            <p>:</p>
+            <p>{{ formData.funeral.time }} WIB</p>
+          </div>
+          <div class="flex gap-2">
+            <p style="width: 140px;">Wonten Ing Makam</p>
+            <p>:</p>
+            <p>{{ formData.funeral.location }}</p>
+          </div>
+        </div>
+
+        <!-- Penutup -->
+        <div class="mb-3" style="font-size: 10pt;">
+          <p class="mb-1">
+            Mekaten Pawartos lelayu Meniko mugi andadosno Pamerikso.
+          </p>
+          <p class="italic">Wassalamu'alaikum wr. wb.</p>
+        </div>
+
+        <!-- Keluarga -->
+        <div style="font-size: 10pt;">
+          <p class="mb-1">Ingkang nandhang dhuhkito :</p>
           <table style="width: 100%; border-collapse: collapse;">
             <tbody>
             <tr v-for="(member, index) in formData.familyMembers" :key="index">
-              <td style="width: 20px; vertical-align: top;">{{ index + 1 }}.</td>
-              <td>
-                {{ member.name }}
-                <span v-if="member.relationship" style="color: #6b7280">({{ member.relationship }})</span>
+              <td style="width: 25px; vertical-align: top; padding-bottom: 2px;">{{ index + 1 }}.</td>
+              <td style="width: 220px; vertical-align: top; padding-bottom: 2px;">{{ member.name }}</td>
+              <td style="vertical-align: top; padding-bottom: 2px;">
+                <span v-if="member.relationship">({{ member.relationship }})</span>
               </td>
             </tr>
             <tr>
-              <td>{{ formData.familyMembers.length + 1}}</td>
-              <td>Lan Sedoyo Keluargo</td>
+              <td style="vertical-align: top; padding-bottom: 2px;">{{ formData.familyMembers.length + 1 }}.</td>
+              <td style="vertical-align: top; padding-bottom: 2px;">Lan Sedoyo Keluarga</td>
+              <td></td>
             </tr>
             </tbody>
           </table>
         </div>
 
-
-        <div class="text-center mt-6 border-t border-black pt-4 text-sm italic">
-          "Mugi-mugi amal saha ibadahipun almarhum/almarhumah katampi wonten ing ngarsanipun Gusti
-          Allah SWT lan kulawarga ingkang dipuntilar tansah dipunparingi kesabaran lan kekiyatan."
-        </div>
       </div>
     </div>
   </div>
