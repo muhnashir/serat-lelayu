@@ -23,7 +23,7 @@ defineProps({
         class="bg-white"
         :style="{
           padding: isPdfMode ? '1cm 1.5cm' : '1cm 0cm',
-          height: '27.7cm',
+          height: isPdfMode ? '27.7cm' : '',
           boxSizing: 'border-box',
           pageBreakAfter: 'always',
           fontSize: '11pt',
