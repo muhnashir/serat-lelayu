@@ -115,7 +115,12 @@ defineProps({
 
         <!-- Pemakaman -->
         <div class="mb-3" style="font-size: 10pt;">
-          <p class="mb-1 font-semibold">Jenazah badhe kasarekaken wonten ing :</p>
+          <p class="mb-1 font-semibold">Jenazah badhe kasarekaken :</p>
+          <div class="flex gap-2 mb-0.5">
+            <p style="width: 140px;">Wonten Ing Makam</p>
+            <p>:</p>
+            <p>{{ formData.funeral.location }}</p>
+          </div>
           <div class="flex gap-2 mb-0.5">
             <p style="width: 140px;">Dinten</p>
             <p>:</p>
@@ -126,15 +131,10 @@ defineProps({
             <p>:</p>
             <p>{{ formatTanggalIndo(formData.funeral.date) }}</p>
           </div>
-          <div class="flex gap-2 mb-0.5">
+          <div class="flex gap-2">
             <p style="width: 140px;">Wanci Jam</p>
             <p>:</p>
             <p>{{ formData.funeral.time }} WIB</p>
-          </div>
-          <div class="flex gap-2">
-            <p style="width: 140px;">Wonten Ing Makam</p>
-            <p>:</p>
-            <p>{{ formData.funeral.location }}</p>
           </div>
         </div>
 
